@@ -1,6 +1,6 @@
 (ns data-retriever.core
   (:gen-class)
-  (:require [data-retriever.request :refer [find-it print-user]]))
+  (:require [data-retriever.request :refer [find-it print-user get-user]]))
 
 
 (def obj (find-it))
@@ -10,7 +10,4 @@
   [& args]
   (println "\n\n")
   (println "user")
-  (prn (print-user)))
-
-
-(println "Isso daqui é um teste! VINICIUS")
+  (prn (get-user "spalussu")))
