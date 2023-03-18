@@ -8,4 +8,7 @@
 
 (defn -main
   [& args]
+  (println "\n\n")
+  (println "started!")
+  (println "\n\n")
   (setup!))

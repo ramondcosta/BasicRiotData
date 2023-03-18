@@ -3,11 +3,17 @@
   (:require [data-retriever.request :refer [get-items]]
             [data-retriever.handleDB :refer [insert-data]]))
 
+(defn item-to-map [item] 
+  (assoc (second item) "_id" (first item)))
+
 (defn setup-items []
   (println "\n")
   (println "Setting items up ...")
   (println "\n")
-  (insert-data (get-items) "Items"))
+  (let [items (get-items)]
+    (doseq [item (get-in items ["data"])]
+           (insert-data (item-to-map item) "Items"))
+    ))
 
 (defn setup! []
   (println "\n\n")
