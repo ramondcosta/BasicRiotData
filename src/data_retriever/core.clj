@@ -1,13 +1,11 @@
 (ns data-retriever.core
   (:gen-class)
-  (:require [data-retriever.request :refer [get-match]]
-             [data-retriever.handleDB :refer [insert-data]]))
-(def match-id "BR1_2698211752")
-(def match (get-match match-id))
-(println match)
+  (:require [data-retriever.request :refer [get-user]]
+            [data-retriever.handleDB :refer [insert-data]]
+            [data-retriever.setup :refer [setup!]]))
+;; (def match-id "BR1_2698384278")
+;; (def match (get-match match-id))
+
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "\n\n")
-  (println "Match!")
-  (insert-data match "Matches"))
+  (setup!))

@@ -13,7 +13,7 @@
 (defn insert-user [user]
   (let [conn (mg/connect)
         db (mg/get-db conn "myNewDB")
-        coll "myNewCollection1"
+        coll "Users"
         ]
     (prn user)
     (mc/insert db coll user)))

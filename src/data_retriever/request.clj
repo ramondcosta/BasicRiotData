@@ -13,6 +13,8 @@
 (defn match-url [match-id] 
   (str "https://americas.api.riotgames.com/lol/match/v5/matches/" match-id "?api_key=" api_key))
 
+(def items-url "https://ddragon.leagueoflegends.com/cdn/13.5.1/data/pt_BR/item.json")
+
 (defn fetch-url [address]
   (with-open [stream (.openStream (java.net.URL. address))]
     (let  [buf (java.io.BufferedReader.
@@ -45,3 +47,6 @@
 
 (defn get-match [match-id]
   (json/read-str (fetch-url (match-url match-id))))
+
+(defn get-items []
+  (json/read-str (fetch-url items-url)))
