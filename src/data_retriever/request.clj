@@ -4,9 +4,14 @@
           [monger.core :as mg]
           [monger.collection :as mc]))
 
-(def api_key "RGAPI-2ff986ea-bfe6-4563-a308-11208a946efa")
+(def api_key "RGAPI-6b219617-fb77-418a-b374-520522c15fc7")
+
 (def url (str "https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/mundicowar?api_key=" api_key))
+
 (defn url-by-name [username] (str "https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" username "?api_key=" api_key))
+(defn get-matches-url [puuid] (str "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/" puuid "/ids?start=0&count=20" "&api_key=" api_key))
+(defn match-url [match-id] 
+  (str "https://americas.api.riotgames.com/lol/match/v5/matches/" match-id "?api_key=" api_key))
 
 (defn fetch-url [address]
   (with-open [stream (.openStream (java.net.URL. address))]
@@ -33,3 +38,10 @@
         user (json/read-str (fetch-url url))]
     (prn user)
     (mc/insert db coll user)))
+
+(defn get-match-ids [puuid] 
+  (json/read-str (fetch-url (get-matches-url puuid))))
+
+
+(defn get-match [match-id]
+  (json/read-str (fetch-url (match-url match-id))))

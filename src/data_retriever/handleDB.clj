@@ -17,3 +17,8 @@
         ]
     (prn user)
     (mc/insert db coll user)))
+
+(defn insert-data [data collection-name]
+  (let [conn (mg/connect)
+        db (mg/get-db conn "myNewDB")] 
+    (mc/insert db collection-name data)))
