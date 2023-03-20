@@ -6,6 +6,7 @@
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [org.clojure/data.json "2.4.0"]
                  [com.novemberain/monger "3.5.0"]
+                 [org.clojure/data.codec "0.1.1"]
 
 ]
   :main ^:skip-aot data-retriever.core

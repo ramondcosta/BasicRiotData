@@ -1,8 +1,10 @@
 (ns data-retriever.request
   (:gen-class)
-(:require [clojure.data.json :as json]
-          [monger.core :as mg]
-          [monger.collection :as mc]))
+  (:require [clojure.data.json :as json]
+            [monger.core :as mg]
+            [monger.collection :as mc]
+            [clojure.java.io :as io]
+            [clojure.data.codec.base64 :as b64]))
 
 (def api_key "RGAPI-6b219617-fb77-418a-b374-520522c15fc7")
 
@@ -14,6 +16,9 @@
   (str "https://americas.api.riotgames.com/lol/match/v5/matches/" match-id "?api_key=" api_key))
 
 (def items-url "https://ddragon.leagueoflegends.com/cdn/13.5.1/data/pt_BR/item.json")
+
+(defn item-picture-url [number] 
+  (str "https://ddragon.leagueoflegends.com/cdn/13.5.1/img/item/" number ".png"))
 
 (defn fetch-url [address]
   (with-open [stream (.openStream (java.net.URL. address))]
@@ -50,3 +55,22 @@
 
 (defn get-items []
   (json/read-str (fetch-url items-url)))
+
+(defn copy-uri-to-file [uri file]
+  (with-open [in (io/input-stream uri)
+              out (io/output-stream file)]
+    (io/copy in out)))
+
+(defn save-item-image [number]
+  (copy-uri-to-file (item-picture-url number) (str "./" number ".png")))
+
+(defn uri->bytes [uri]
+  (with-open [in (io/input-stream uri)
+              out (java.io.ByteArrayOutputStream.)]
+    (io/copy in out)
+    (.toByteArray out)))
+
+(defn save-image [number]
+  ;; (String. (b64/encode (.getBytes (str number))) "UTF-8")
+  (String. (b64/encode (uri->bytes (item-picture-url number))))
+  )

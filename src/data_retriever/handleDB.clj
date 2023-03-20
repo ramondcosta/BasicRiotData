@@ -2,7 +2,9 @@
   (:gen-class)
   (:require [monger.core :as mg]
             [monger.collection :as mc])
-  (:import [com.mongodb MongoOptions ServerAddress]))
+  (:import [com.mongodb MongoOptions ServerAddress])
+  )
+(:import java.util.Base64)
 
 (defn find-it []
   (let [conn (mg/connect)

@@ -19,4 +19,5 @@
   (println "\n\n")
   (println "Setting up data!")
   (println "\n\n")
-  (setup-items))
+  ;; (setup-items)
+  )
