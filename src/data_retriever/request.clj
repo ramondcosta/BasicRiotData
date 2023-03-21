@@ -6,7 +6,7 @@
             [clojure.java.io :as io]
             [clojure.data.codec.base64 :as b64]))
 
-(def api_key "RGAPI-6b219617-fb77-418a-b374-520522c15fc7")
+(def api_key "RGAPI-1ad9a141-6af2-4c64-834c-2a1357f8895f")
 
 (def url (str "https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/mundicowar?api_key=" api_key))
 
