@@ -20,6 +20,9 @@
 (defn item-picture-url [number] 
   (str "https://ddragon.leagueoflegends.com/cdn/13.5.1/img/item/" number ".png"))
 
+(defn user-by-uuid-url [uuid]
+  (str "https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/" uuid "?api_key=" api_key))
+
 (defn fetch-url [address]
   (with-open [stream (.openStream (java.net.URL. address))]
     (let  [buf (java.io.BufferedReader.
@@ -28,6 +31,9 @@
 
 (defn get-user [username]
   (json/read-str (fetch-url (url-by-name username))))
+
+(defn get-user-by-uuid [uuid]
+  (json/read-str (fetch-url (user-by-uuid-url uuid))))
 
 (defn print-user []
   (prn (json/read-str (fetch-url url))))
