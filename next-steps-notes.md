@@ -1,2 +1,5 @@
 - Check Specific champion (Mundo!) statistics for a given player (Me!) 
-- 
+- Failure handling 
+    - Figure out data merging
+    - Figure out data duplication
+- Rate limit problem
